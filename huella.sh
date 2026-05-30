@@ -176,7 +176,7 @@ clear
 
 echo
 printf "${NEON}"
-type_text "¿Cómo contagiar con la belleza del mundo?" 0.07
+type_text "?cómo regalar el contagio?" 0.07
 printf "${RESET}"
 echo
 echo
