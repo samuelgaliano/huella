@@ -34,20 +34,30 @@ static() {
 # Función para imagen en terminal
 show_image() {
     python3 - << 'EOF'
-from PIL import Image
-import urllib.request, os, tempfile, ssl
+import urllib.request, os, tempfile, ssl, sys
 
 ctx = ssl._create_unverified_context()
 url = "https://raw.githubusercontent.com/samuelgaliano/huella/main/imagen-2.jpg"
 tmp = tempfile.mktemp(suffix=".jpg")
+
 with urllib.request.urlopen(url, context=ctx) as r, open(tmp, 'wb') as f:
     f.write(r.read())
 
-img = Image.open(tmp)
-img = img.convert("RGB")
+try:
+    from PIL import Image
+except ImportError:
+    try:
+        import subprocess
+        subprocess.run(["pip3", "install", "Pillow", "-q", "--break-system-packages"],
+                      capture_output=True)
+        from PIL import Image
+    except Exception:
+        os.remove(tmp)
+        sys.exit(0)
+
+img = Image.open(tmp).convert("RGB")
 ancho = 80
-ratio = img.height / img.width
-alto = int(ancho * ratio * 0.45)
+alto = int(ancho * (img.height / img.width) * 0.45)
 img = img.resize((ancho, alto))
 
 for y in range(img.height):
