@@ -93,7 +93,7 @@ sleep 0.5
 
 len=${#nombre}
 if [ $len -le 4 ]; then
-    response="$nombre. Cuatro letras justas para una persona entera."
+    response="$nombre. Las letras justas para una persona entera."
 elif [ $len -le 7 ]; then
     response="$nombre. Lo voy a recordar un momento y luego olvidar."
 else
