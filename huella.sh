@@ -35,11 +35,12 @@ static() {
 show_image() {
     python3 - << 'EOF'
 from PIL import Image
-import urllib.request, os, tempfile
+import urllib.request, os, tempfile, ssl
 
+ctx = ssl._create_unverified_context()
 url = "https://raw.githubusercontent.com/samuelgaliano/huella/main/imagen.jpg"
 tmp = tempfile.mktemp(suffix=".jpg")
-urllib.request.urlretrieve(url, tmp)
+urllib.request.urlretrieve(url, tmp, context=ctx)
 
 img = Image.open(tmp)
 img = img.convert("RGB")
@@ -197,4 +198,6 @@ type_text "¿Cómo contagiar con la belleza del mundo?" 0.07
 printf "${RESET}"
 echo
 echo
+
+
 
