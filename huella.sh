@@ -38,7 +38,7 @@ from PIL import Image
 import urllib.request, os, tempfile, ssl
 
 ctx = ssl._create_unverified_context()
-url = "https://raw.githubusercontent.com/samuelgaliano/huella/main/imagen.jpg"
+url = "https://raw.githubusercontent.com/samuelgaliano/huella/main/imagen-2.jpg"
 tmp = tempfile.mktemp(suffix=".jpg")
 with urllib.request.urlopen(url, context=ctx) as r, open(tmp, 'wb') as f:
     f.write(r.read())
